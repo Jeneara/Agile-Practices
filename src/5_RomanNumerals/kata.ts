@@ -14,6 +14,14 @@ export const romanNumeral = (arabicNumber: number): string | undefined => {
   // 2. Subtraction numbers -
   // 3. Addition numbers +
 
-  // Basic Numbers 1 & 5 & 10 & 50 & 100 & 500 & 1000
-  return baseNumbers.get(arabicNumber);
+  let romanNumeral = '';
+
+  baseNumbers.forEach((value, key) => {
+    while (arabicNumber >= key) {
+      arabicNumber -= key;
+      romanNumeral += value;
+    }
+  });
+
+  return romanNumeral;
 };
