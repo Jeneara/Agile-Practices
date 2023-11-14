@@ -52,4 +52,12 @@ describe('Roman numeral should', () => {
   test('should return MMM if arabic number is 3000', () => {
     expect(romanNumeral(3000)).toBe('MMM');
   });
+
+  test('should return CMXCIX if arabic number is 999', () => {
+    expect(romanNumeral(999)).toBe('CMXCIX');
+  });
+
+  test('should return CDXLIV if arabic number is 444', () => {
+    expect(romanNumeral(444)).toBe('CDXLIV');
+  });
 });
