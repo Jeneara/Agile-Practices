@@ -14,8 +14,6 @@ export const romanNumeral = (arabicNumber: number): string | undefined => {
   // 2. Subtraction numbers -
   // 3. Addition numbers +
 
-  // can base number be found in arabic number - that symbol is the one we use
-
   // Basic Numbers 1 & 5 & 10 & 50 & 100 & 500 & 1000
   return baseNumbers.get(arabicNumber);
 };
