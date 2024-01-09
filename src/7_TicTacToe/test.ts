@@ -19,10 +19,37 @@ describe('TicTacToe should', () => {
     ]);
   });
 
-  // test('it is a valid move', () => {
-  //   const ticTacToe = new TicTacToe;
-  //   expect(ticTacToe.play)
-  // });
+  test('invalid when outside of grid', () => {
+    const ticTacToe = new TicTacToe();
+    expect(() => ticTacToe.play([0, 4])).toThrow('Play invalid');
+  });
+
+  test('the second player is player o', () => {
+    const ticTacToe = new TicTacToe();
+    ticTacToe.play([0, 1]);
+
+    expect(ticTacToe.play([0, 2])).toStrictEqual([
+      [null, 'X', 'O'],
+      [null, null, null],
+      [null, null, null],
+    ]);
+  });
+
+  test('Players cannot play on a played square', () => {
+    const ticTacToe = new TicTacToe();
+    ticTacToe.play([0, 1]);
+
+    expect(() => ticTacToe.play([0, 1])).toThrow('Position not available');
+  });
+
+  test('A Player wins when it has three squares in a row', () => {
+    const ticTacToe = new TicTacToe();
+    ticTacToe.play([0, 0]);
+    ticTacToe.play([1, 1]);
+    ticTacToe.play([0, 1]);
+    ticTacToe.play([1, 2]);
+    expect(ticTacToe.play([0, 2])).toBe('Player X Wins!');
+  });
 });
 
 //instance is instantiated with a grid which is a 2d array of null elements
