@@ -1,60 +1,48 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-type Position = [number, number];
-export class TicTacToe {
-  public grid: (string | null)[][];
-  private nextPlayer: 'X' | 'O';
+type Player = 'X' | 'O';
+type Position = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+type Grid = (Player | null)[];
+
+class Board {
+  private previousPlays: Grid;
+
   constructor() {
-    this.grid = [
-      [null, null, null], //0
-      [null, null, null], //1
-      [null, null, null], //2
-    ];
-    this.nextPlayer = 'X';
+    this.previousPlays = [null, null, null, null, null, null, null, null, null];
   }
 
-  play(position: Position) {
-    const [row, column] = position;
+  public isSquarePlayed(position: Position) {
+    return this.previousPlays[position] !== null;
+  }
 
-    if (!this.isMoveWithinGrid(row, column)) {
+  public savePlay(position: Position, player: Player) {
+    this.previousPlays[position] = player;
+  }
+}
+
+export class TicTacToe {
+  private nextPlayer: Player;
+  private board: Board;
+
+  constructor() {
+    this.nextPlayer = 'X';
+    this.board = new Board();
+  }
+
+  public play(position: Position) {
+    const currentPlayer = this.nextPlayer;
+
+    if (this.board.isSquarePlayed(position)) {
       throw new Error('Play invalid');
     }
 
-    if (!this.isPositionAvailable(row, column)) {
-      throw new Error('Position not available');
-    }
-
-    this.setMove(row, column);
+    this.board.savePlay(position, currentPlayer);
 
     this.setNextPlayer();
 
-    if (this.grid[0]?.join() === 'X,X,X') {
-      return 'Player X Wins!';
-    }
-
-    return this.grid;
-  }
-
-  private isMoveWithinGrid(row: number, column: number) {
-    return row >= 0 && row <= 2 && column >= 0 && column <= 2;
-  }
-
-  private isPositionAvailable(row: number, column: number) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-expect-error
-    return this.grid[row][column] === null;
-  }
-
-  private setMove(row: number, column: number) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-expect-error
-    this.grid[row][column] = this.nextPlayer;
+    return currentPlayer;
   }
 
   private setNextPlayer() {
-    if (this.nextPlayer === 'X') {
-      this.nextPlayer = 'O';
-    } else {
-      this.nextPlayer = 'X';
-    }
+    this.nextPlayer = this.nextPlayer === 'X' ? 'O' : 'X';
   }
 }
