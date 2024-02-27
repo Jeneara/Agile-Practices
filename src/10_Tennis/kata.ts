@@ -11,9 +11,9 @@ export class TennisGame implements TennisGameInterface {
   private namePlayerOne: string;
   private namePlayerTwo: string;
 
-  constructor(player1Name: string, player2Name: string) {
-    this.namePlayerOne = player1Name;
-    this.namePlayerTwo = player2Name;
+  constructor(namePlayerOne: string, namePlayerTwo: string) {
+    this.namePlayerOne = namePlayerOne;
+    this.namePlayerTwo = namePlayerTwo;
   }
 
   wonPoint(playerName: string): void {
