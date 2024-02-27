@@ -25,11 +25,7 @@ export class TennisGame implements TennisGameInterface {
     if (this.scorePlayerOne === this.scorePlayerTwo) {
       score = this.getEqualScore(this.scorePlayerOne);
     } else if (this.scorePlayerOne >= 4 || this.scorePlayerTwo >= 4) {
-      const minusResult: number = this.scorePlayerOne - this.scorePlayerTwo;
-      if (minusResult === 1) score = 'Advantage ' + this.namePlayerOne;
-      else if (minusResult === -1) score = 'Advantage ' + this.namePlayerTwo;
-      else if (minusResult >= 2) score = 'Win for ' + this.namePlayerOne;
-      else score = 'Win for ' + this.namePlayerTwo;
+      score = this.getWinningOrAdvantagePlayer();
     } else {
       for (let i = 1; i < 3; i++) {
         if (i === 1) tempScore = this.scorePlayerOne;
@@ -54,6 +50,24 @@ export class TennisGame implements TennisGameInterface {
       }
     }
     return score;
+  }
+
+  private getWinningOrAdvantagePlayer() {
+    const scoreDifference = this.scorePlayerOne - this.scorePlayerTwo;
+
+    if (scoreDifference === 1) {
+      return 'Advantage ' + this.namePlayerOne;
+    }
+
+    if (scoreDifference === -1) {
+      return 'Advantage ' + this.namePlayerTwo;
+    }
+
+    if (scoreDifference >= 2) {
+      return 'Win for ' + this.namePlayerOne;
+    }
+
+    return 'Win for ' + this.namePlayerTwo;
   }
 
   private getEqualScore(score: number): string {
