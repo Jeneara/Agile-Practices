@@ -8,16 +8,16 @@ export interface TennisGame {
 export class TennisGame1 implements TennisGame {
   private scorePlayerOne = 0;
   private scorePlayerTwo = 0;
-  private player1Name: string;
-  private player2Name: string;
+  private namePlayerOne: string;
+  private namePlayerTwo: string;
 
   constructor(player1Name: string, player2Name: string) {
-    this.player1Name = player1Name;
-    this.player2Name = player2Name;
+    this.namePlayerOne = player1Name;
+    this.namePlayerTwo = player2Name;
   }
 
   wonPoint(playerName: string): void {
-    if (playerName === this.player1Name) this.scorePlayerOne += 1;
+    if (playerName === this.namePlayerOne) this.scorePlayerOne += 1;
     else this.scorePlayerTwo += 1;
   }
 
@@ -41,10 +41,10 @@ export class TennisGame1 implements TennisGame {
       }
     } else if (this.scorePlayerOne >= 4 || this.scorePlayerTwo >= 4) {
       const minusResult: number = this.scorePlayerOne - this.scorePlayerTwo;
-      if (minusResult === 1) score = 'Advantage ' + this.player1Name;
-      else if (minusResult === -1) score = 'Advantage ' + this.player2Name;
-      else if (minusResult >= 2) score = 'Win for ' + this.player1Name;
-      else score = 'Win for ' + this.player2Name;
+      if (minusResult === 1) score = 'Advantage ' + this.namePlayerOne;
+      else if (minusResult === -1) score = 'Advantage ' + this.namePlayerTwo;
+      else if (minusResult >= 2) score = 'Win for ' + this.namePlayerOne;
+      else score = 'Win for ' + this.namePlayerTwo;
     } else {
       for (let i = 1; i < 3; i++) {
         if (i === 1) tempScore = this.scorePlayerOne;
