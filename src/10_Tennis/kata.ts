@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 export interface TennisGameInterface {
   wonPoint(playerName: string): void;
   getScore(): string;
@@ -25,20 +23,7 @@ export class TennisGame implements TennisGameInterface {
     let score = '';
     let tempScore = 0;
     if (this.scorePlayerOne === this.scorePlayerTwo) {
-      switch (this.scorePlayerOne) {
-        case 0:
-          score = 'Love-All';
-          break;
-        case 1:
-          score = 'Fifteen-All';
-          break;
-        case 2:
-          score = 'Thirty-All';
-          break;
-        default:
-          score = 'Deuce';
-          break;
-      }
+      score = this.getEqualScore(this.scorePlayerOne);
     } else if (this.scorePlayerOne >= 4 || this.scorePlayerTwo >= 4) {
       const minusResult: number = this.scorePlayerOne - this.scorePlayerTwo;
       if (minusResult === 1) score = 'Advantage ' + this.namePlayerOne;
@@ -69,5 +54,18 @@ export class TennisGame implements TennisGameInterface {
       }
     }
     return score;
+  }
+
+  private getEqualScore(score: number): string {
+    switch (score) {
+      case 0:
+        return 'Love-All';
+      case 1:
+        return 'Fifteen-All';
+      case 2:
+        return 'Thirty-All';
+      default:
+        return 'Deuce';
+    }
   }
 }
