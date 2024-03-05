@@ -20,28 +20,21 @@ export class TennisGame implements TennisGameInterface {
   }
 
   getScore(): string {
-    let score = '';
-    let tempScore = 0;
     if (this.scorePlayerOne === this.scorePlayerTwo) {
-      score = this.getEqualScore(this.scorePlayerOne);
+      return this.getEqualScore(this.scorePlayerOne);
     } else if (this.scorePlayerOne >= 4 || this.scorePlayerTwo >= 4) {
-      score = this.getWinningOrAdvantagePlayer();
+      return this.getWinningOrAdvantagePlayer();
     } else {
-      for (let i = 1; i < 3; i++) {
-        if (i === 1) {
-          tempScore = this.scorePlayerOne;
-        } else {
-          score += '-';
-          tempScore = this.scorePlayerTwo;
-        }
-        score += this.getTennisScore(tempScore);
-      }
+      return (
+        this.getTennisScoreFromNumberOfPoints(this.scorePlayerOne) +
+        '-' +
+        this.getTennisScoreFromNumberOfPoints(this.scorePlayerTwo)
+      );
     }
-    return score;
   }
 
-  private getTennisScore(tempScore: number) {
-    switch (tempScore) {
+  private getTennisScoreFromNumberOfPoints(numOfPoints: number) {
+    switch (numOfPoints) {
       case 0:
         return 'Love';
       case 1:
