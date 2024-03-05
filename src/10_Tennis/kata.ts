@@ -80,15 +80,9 @@ export class TennisGame implements TennisGameInterface {
   }
 
   private getEqualScore(score: number): string {
-    switch (score) {
-      case 0:
-        return 'Love-All';
-      case 1:
-        return 'Fifteen-All';
-      case 2:
-        return 'Thirty-All';
-      default:
-        return 'Deuce';
+    if (score < 3) {
+      return `${pointsScoreMapping.get(score)}-All`;
     }
+    return 'Deuce';
   }
 }
