@@ -20,9 +20,9 @@ export class TennisGame implements TennisGameInterface {
   }
 
   getScore(): string {
-    if (this.scorePlayerOne === this.scorePlayerTwo) {
+    if (this.isGameATie()) {
       return this.getEqualScore(this.scorePlayerOne);
-    } else if (this.scorePlayerOne >= 4 || this.scorePlayerTwo >= 4) {
+    } else if (this.hasOnePlayerMoreThanFourPoints()) {
       return this.getWinningOrAdvantagePlayer();
     } else {
       return (
@@ -31,6 +31,14 @@ export class TennisGame implements TennisGameInterface {
         this.getTennisScoreFromNumberOfPoints(this.scorePlayerTwo)
       );
     }
+  }
+
+  private hasOnePlayerMoreThanFourPoints() {
+    return this.scorePlayerOne >= 4 || this.scorePlayerTwo >= 4;
+  }
+
+  private isGameATie(): boolean {
+    return this.scorePlayerOne === this.scorePlayerTwo;
   }
 
   private getTennisScoreFromNumberOfPoints(numOfPoints: number) {
