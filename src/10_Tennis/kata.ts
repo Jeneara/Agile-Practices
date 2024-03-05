@@ -3,6 +3,13 @@ export interface TennisGameInterface {
   getScore(): string;
 }
 
+const pointsScoreMapping = new Map<number, string>([
+  [0, 'Love'],
+  [1, 'Fifteen'],
+  [2, 'Thirty'],
+  [3, 'Forty'],
+]);
+
 export class TennisGame implements TennisGameInterface {
   private scorePlayerOne = 0;
   private scorePlayerTwo = 0;
@@ -51,16 +58,7 @@ export class TennisGame implements TennisGameInterface {
   }
 
   private getTennisScoreFromNumberOfPoints(numOfPoints: number) {
-    switch (numOfPoints) {
-      case 0:
-        return 'Love';
-      case 1:
-        return 'Fifteen';
-      case 2:
-        return 'Thirty';
-      default:
-        return 'Forty';
-    }
+    return pointsScoreMapping.get(numOfPoints);
   }
 
   private getWinningOrAdvantagePlayer() {
