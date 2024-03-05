@@ -15,22 +15,31 @@ export class TennisGame implements TennisGameInterface {
   }
 
   wonPoint(playerName: string): void {
-    if (playerName === this.namePlayerOne) this.scorePlayerOne += 1;
-    else this.scorePlayerTwo += 1;
+    if (playerName === this.namePlayerOne) {
+      this.scorePlayerOne += 1;
+    } else {
+      this.scorePlayerTwo += 1;
+    }
   }
 
   getScore(): string {
     if (this.isGameATie()) {
       return this.getEqualScore(this.scorePlayerOne);
-    } else if (this.hasOnePlayerMoreThanFourPoints()) {
-      return this.getWinningOrAdvantagePlayer();
-    } else {
-      return (
-        this.getTennisScoreFromNumberOfPoints(this.scorePlayerOne) +
-        '-' +
-        this.getTennisScoreFromNumberOfPoints(this.scorePlayerTwo)
-      );
     }
+
+    if (this.hasOnePlayerMoreThanFourPoints()) {
+      return this.getWinningOrAdvantagePlayer();
+    }
+
+    return this.getCurrentTennisScore();
+  }
+
+  private getCurrentTennisScore(): string {
+    return (
+      this.getTennisScoreFromNumberOfPoints(this.scorePlayerOne) +
+      '-' +
+      this.getTennisScoreFromNumberOfPoints(this.scorePlayerTwo)
+    );
   }
 
   private hasOnePlayerMoreThanFourPoints() {
