@@ -60,7 +60,6 @@
     "tac": "jest -i src/15_TicTacToe/test.ts --coverage=true",
     "esa": "jest -i src/16_ESAMarsRover/test.ts --coverage=true"
   },
-  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
@@ -78,7 +77,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-sonarjs": "^0.21.0",
-    "fast-check": "^3.13.2",
+    "fast-check": "^3.16.0",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-extended-snapshot": "^1.1.5",
